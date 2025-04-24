@@ -2,7 +2,7 @@ import React from 'react';
 
 const TextBox = ({ placeholder, value, onChange }) => {
   const inputStyle = {
-    width: '50%',
+    width: '80%',
     backgroundColor: '#D9D9D9',
     border: 'none',
     borderRadius: '10px',
