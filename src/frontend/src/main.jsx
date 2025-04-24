@@ -6,7 +6,8 @@ import RegisterForm from './pages/RegisterForm'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RegisterForm />
+
+    
 
   </StrictMode>,
 )
