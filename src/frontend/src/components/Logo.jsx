@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Logo = ({ src, size = 80, alt = 'Logo' }) => {
+const Logo = ({ src, size = 150, alt = 'Logo' }) => {
   const logoStyle = {
     width: size,
     height: size,
@@ -16,7 +16,8 @@ const Logo = ({ src, size = 80, alt = 'Logo' }) => {
   const imgStyle = {
     width: '100%',
     height: '100%',
-    objectFit: 'cover',
+    objectFit: 'content',
+    border: 'solid #ffffff 2rem'
   };
 
   return (
