@@ -7,6 +7,8 @@ WORKDIR /app
 # Copy file package.json và package-lock.json (nếu có)
 COPY package*.json ./
 
+
+RUN npm install -g nodemon
 # Cài đặt dependencies
 RUN npm install
 
