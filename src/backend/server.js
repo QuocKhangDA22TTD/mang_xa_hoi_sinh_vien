@@ -1,10 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const accountRoutes = require('./routes/accountRoutes');
+const authRoutes = require('./routes/authRoutes');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cookieParser());
 
+app.use('/api/auth', authRoutes);
 app.use('/api/accounts', accountRoutes);
 
 const PORT = process.env.PORT || 5000;

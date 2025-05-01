@@ -2,32 +2,32 @@ const db = require('../config/db');
 const bcrypt = require('bcryptjs');
 
 exports.register = async (req, res) => {
+  try {
     const { email, password } = req.body;
 
     // Kiểm tra dữ liệu hợp lệ
     if (!email || !password) {
-        return res.status(400).json({ message: 'Vui lòng nhập đầy đủ email, tên, mật khẩu' });
+      return res.status(400).json({ message: 'Vui lòng nhập đầy đủ email và mật khẩu' });
     }
 
-    // Kiểm tra account đã tồn tại chưa
-    db.query('SELECT * FROM accounts WHERE email = ?', [email], async (err, result) => {
-        if (err) throw err;
-        if (result.length > 0) {
-            return res.status(400).json({ message: 'Email đã được sử dụng' });
-        }
+    // Kiểm tra email đã tồn tại
+    const [existing] = await db.execute('SELECT * FROM accounts WHERE email = ?', [email]);
+    if (existing.length > 0) {
+      return res.status(400).json({ message: 'Email đã được sử dụng' });
+    }
 
-        // Mã hóa mật khẩu
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
+    // Mã hóa mật khẩu
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Insert account
-        const account = {
-            email,
-            password: hashedPassword,
-        };
-        db.query('INSERT INTO accounts SET ?', account, (err, result) => {
-            if (err) throw err;
-            res.status(201).json({ message: 'Đăng ký thành công', accountId: result.insertId });
-        });
-    });
+    // Tạo tài khoản mới
+    const [result] = await db.execute(
+      'INSERT INTO accounts (email, password) VALUES (?, ?)',
+      [email, hashedPassword]
+    );
+
+    res.status(201).json({ message: 'Đăng ký thành công', accountId: result.insertId });
+  } catch (err) {
+    console.error('Đăng ký lỗi:', err);
+    res.status(500).json({ message: 'Lỗi máy chủ.' });
+  }
 };
