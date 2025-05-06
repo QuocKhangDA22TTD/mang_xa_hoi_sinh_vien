@@ -16,7 +16,7 @@ export const loginUser = async (email, password) => {
       throw new Error(data.message || 'Lỗi không xác định');
     }
 
-    return data; // Trả về thông tin đăng nhập thành công
+    return data; 
   } catch (error) {
     throw error; // Cho component xử lý lỗi
   }
