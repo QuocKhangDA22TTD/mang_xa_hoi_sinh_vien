@@ -76,11 +76,13 @@ const RegisterForm = () => {
             />
             <TextBox
               placeholder="Nhập Mật Khẩu"
+              isPassword={true}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
             <TextBox
               placeholder="Nhập Lại Mật Khẩu"
+              isPassword={true}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />

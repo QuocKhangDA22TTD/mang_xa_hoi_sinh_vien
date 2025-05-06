@@ -53,7 +53,7 @@ const LoginForm = () => {
             />
             <TextBox
               placeholder="Nhập Mật Khẩu"
-              type="password"
+              isPassword={true}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
