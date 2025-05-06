@@ -1,20 +1,44 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // ✅ Thêm dòng này
 import Frame from '../components/Frame';
 import Label from '../components/Label';
 import TextBox from '../components/TextBox';
 import Button from '../components/Button';
 import Logo from '../components/Logo';
 import LoginLink from '../components/LoginLink';
+import { registerUser } from '../api/register';
 
 const RegisterForm = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const navigate = useNavigate(); // ✅ Khởi tạo điều hướng
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    // TODO: Xử lý logic đăng ký ở đây
-    alert(`Đăng ký:\nTài khoản: ${username}\nMật khẩu: ${password}`);
+
+    if (!email || !password || !confirmPassword) {
+      alert('Vui lòng nhập đầy đủ thông tin!');
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      alert('Mật khẩu không khớp!');
+      return;
+    }
+
+    try {
+      const res = await registerUser(email, password);
+      
+      alert(res.message);
+      if(res.message == 'Đăng ký thành công')
+        navigate('/LoginForm'); // ✅ Chuyển hướng sau khi đăng ký thành công
+    
+      
+    } catch (error) {
+      console.error(error);
+      alert(error.message || 'Đã xảy ra lỗi khi kết nối máy chủ.');
+    }
   };
 
   const formStyle = {
@@ -37,19 +61,18 @@ const RegisterForm = () => {
     <div style={containerWrapper}>
       <Frame
         leftContent={
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <Logo src="../../public/Logo.png" />
-              <LoginLink onClick={() => alert('Đi tới trang đăng nhập')} />
-            </div>
-          }
-        
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Logo src="../../public/Logo.png" />
+            <LoginLink onClick={() => navigate('/login')} /> {/* ✅ Cập nhật luôn link */}
+          </div>
+        }
         rightContent={
           <form style={formStyle} onSubmit={handleRegister}>
             <Label>ĐĂNG KÝ</Label>
             <TextBox
-              placeholder="Nhập Tài Khoản"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Nhập Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <TextBox
               placeholder="Nhập Mật Khẩu"

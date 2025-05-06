@@ -4,11 +4,19 @@ const accountRoutes = require('./routes/accountRoutes');
 const authRoutes = require('./routes/authRoutes');
 const cookieParser = require('cookie-parser');
 
+
+
+
 const cors = require('cors');
+
 const app = express();
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors())
+
+const cors = require('cors');
+app.use(cors());
+
 
 app.use('/api/auth', authRoutes);
 app.use('/api/accounts', accountRoutes);
