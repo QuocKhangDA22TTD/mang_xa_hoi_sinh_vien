@@ -32,7 +32,7 @@ const RegisterForm = () => {
       
       alert(res.message);
       if(res.message == 'Đăng ký thành công')
-        navigate('/LoginForm'); // ✅ Chuyển hướng sau khi đăng ký thành công
+        navigate('/login'); // ✅ Chuyển hướng sau khi đăng ký thành công
     
       
     } catch (error) {
