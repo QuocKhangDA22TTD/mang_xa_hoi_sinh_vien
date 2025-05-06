@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { loginUser } from '../api/Login'; // 👈 Import hàm mới
+import { loginUser } from '../api/Login';
+import { useNavigate } from 'react-router-dom';
 import LoginFrame from '../components/LoginFrame';
 import Label from '../components/Label';
 import TextBox from '../components/TextBox';
@@ -7,6 +8,7 @@ import Button from '../components/Button';
 import Logo from '../components/Logo';
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -63,7 +65,7 @@ const LoginForm = () => {
             <Logo src="../../public/Logo.png" />
             <div style={{ color: '#fff', marginTop: '20px' }}>Chưa có tài khoản?</div>
             <span
-              onClick={() => alert('Đi tới trang đăng ký')}
+              onClick={() => navigate('/register')}
               style={{
                 color: '#fff',
                 fontWeight: 'bold',

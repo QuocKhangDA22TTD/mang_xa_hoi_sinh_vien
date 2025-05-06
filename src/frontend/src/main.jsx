@@ -11,13 +11,8 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        {/* Redirect từ root về trang đăng nhập */}
-        <Route path="/" element={<Navigate to="/login" replace />} />
-        
-        {/* Đăng nhập */}
+        <Route path="/" element={<Navigate to="/register" replace />} />
         <Route path="/login" element={<LoginForm />} />
-        
-        {/* Đăng ký */}
         <Route path="/register" element={<RegisterForm />} />
       </Routes>
     </BrowserRouter>
