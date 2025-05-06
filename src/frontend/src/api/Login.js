@@ -1,4 +1,3 @@
-// src/api/auth.js
 
 export const loginUser = async (email, password) => {
   try {
