@@ -18,6 +18,6 @@ export const loginUser = async (email, password) => {
 
     return data; 
   } catch (error) {
-    throw error; // Cho component xử lý lỗi
+    throw error; 
   }
 };
