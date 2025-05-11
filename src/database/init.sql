@@ -14,3 +14,4 @@ INSERT INTO accounts (email, password, created_at, status) VALUES
 ('alice@example.com', 'hashedpassword1', NOW(), 'active'),
 ('bob@example.com', 'hashedpassword2', NOW(), 'pending'),
 ('charlie@example.com', 'hashedpassword3', NOW(), 'banned');
+
